@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { AlertCircle } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
@@ -13,6 +14,17 @@ import { usePromptStore } from '@/stores/prompt-store'
 import { useSettingsStore } from '@/stores/settings-store'
 
 const UNCLOSED_REGEX = /\{\{(?!\w+\}\})/
+const VAR_REGEX = /\{\{(\w+)\}\}/g
+
+function parseVarsFromTemplate(template: string): string[] {
+  const matches = new Set<string>()
+  let match: RegExpExecArray | null
+  const regex = new RegExp(VAR_REGEX)
+  while ((match = regex.exec(template)) !== null) {
+    matches.add(match[1])
+  }
+  return [...matches]
+}
 
 export function PromptEditor() {
   const template = usePromptStore((s) => s.template)
@@ -21,8 +33,10 @@ export function PromptEditor() {
   const setTemplate = usePromptStore((s) => s.setTemplate)
   const setVariable = usePromptStore((s) => s.setVariable)
   const setSelectedModel = usePromptStore((s) => s.setSelectedModel)
-  const parsedVars = usePromptStore((s) => s.getParsedVariables())
-  const availableModels = useSettingsStore((s) => s.getAvailableModels())
+  const apiKeys = useSettingsStore((s) => s.apiKeys)
+
+  const parsedVars = useMemo(() => parseVarsFromTemplate(template), [template])
+  const availableModels = useMemo(() => useSettingsStore.getState().getAvailableModels(), [apiKeys])
 
   const hasUnclosed = UNCLOSED_REGEX.test(template)
 

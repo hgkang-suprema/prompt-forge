@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Loader2, Play } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { Button } from '@/components/ui/button'
@@ -23,7 +23,8 @@ interface BenchmarkEntry {
 export function Benchmark() {
   const template = usePromptStore((s) => s.template)
   const getRenderedPrompt = usePromptStore((s) => s.getRenderedPrompt)
-  const availableModels = useSettingsStore((s) => s.getAvailableModels())
+  const apiKeys = useSettingsStore((s) => s.apiKeys)
+  const availableModels = useMemo(() => useSettingsStore.getState().getAvailableModels(), [apiKeys])
   const addResult = useResultStore((s) => s.addResult)
 
   const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())

@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# Prompt Forge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Prompt Reliability & Evaluation Engine**
 
-Currently, two official plugins are available:
+"내 프롬프트는 99%의 확률로 안전한가?"에 대한 답을 주는 도구입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Stress Test** — 동일 프롬프트를 N회 반복 실행하고 코사인 유사도 기반 일관성 점수 측정
+- **Unit Testing** — 변수 세트별 기대값과 실제 응답 비교 (Semantic / Contains / Regex / Exact)
+- **Model Benchmarking** — 동일 프롬프트를 여러 모델에 동시 투입하고 응답 시간/토큰 비교
+- **Analytics** — 테스트 결과 히스토리, 통계 대시보드, JSON Export
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+| Category | Library | Version |
+|----------|---------|---------|
+| **Framework** | [React](https://react.dev) | 19.x |
+| **Build Tool** | [Vite](https://vite.dev) | 8.x |
+| **Language** | [TypeScript](https://www.typescriptlang.org) | 5.9 |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com) | 4.x |
+| **UI Components** | [shadcn/ui](https://ui.shadcn.com) (Base UI) | - |
+| **Icons** | [Lucide React](https://lucide.dev) | 1.x |
+| **State Management** | [Zustand](https://zustand.docs.pmnd.rs) | 5.x |
+| **Charts** | [Recharts](https://recharts.org) | 3.x |
+| **LLM Integration** | [Vercel AI SDK](https://sdk.vercel.ai) | 6.x |
+| **LLM Provider — Anthropic** | [@ai-sdk/anthropic](https://sdk.vercel.ai/providers/ai-sdk-providers/anthropic) | 3.x |
+| **LLM Provider — OpenAI** | [@ai-sdk/openai](https://sdk.vercel.ai/providers/ai-sdk-providers/openai) | 3.x |
+| **LLM Provider — Google** | [@ai-sdk/google](https://sdk.vercel.ai/providers/ai-sdk-providers/google) | 3.x |
+| **Font** | [Geist](https://vercel.com/font) (via @fontsource-variable/geist) | - |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js 22+
+- API Key for at least one provider (Anthropic, OpenAI, or Google)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Install & Run
+
+```bash
+git clone https://github.com/hgkang-suprema/prompt-forge.git
+cd prompt-forge
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open `http://localhost:5173/prompt-forge/` in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Setup API Keys
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Click **Settings** in the sidebar
+2. Enter your API key(s) for the providers you want to use
+3. Keys are stored in browser localStorage only — never sent to any server
+
+## Supported Models
+
+| Provider | Models |
+|----------|--------|
+| Anthropic | Claude Sonnet 4, Claude Haiku 4 |
+| OpenAI | GPT-4o, GPT-4o Mini |
+| Google | Gemini 2.5 Flash, Gemini 2.5 Pro |
+
+## Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Production build (TypeScript check + Vite build)
+npm run lint     # ESLint
+npm run preview  # Preview production build
 ```
+
+## Architecture
+
+```
+src/
+├── components/
+│   ├── ui/              # shadcn/ui components
+│   ├── layout/          # Sidebar layout
+│   ├── prompt-editor    # Template editor with {{variable}} support
+│   ├── stress-test      # N-run consistency testing
+│   ├── unit-test        # Expected value comparison
+│   ├── benchmark        # Multi-model comparison
+│   ├── analytics        # Stats dashboard + JSON export
+│   └── settings-dialog  # API key management
+├── stores/              # Zustand stores (settings, prompt, results)
+├── lib/                 # LLM client, embeddings, similarity, evaluator
+└── App.tsx
+```
+
+## License
+
+MIT
