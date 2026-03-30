@@ -58,7 +58,7 @@ Open `http://localhost:5173/prompt-forge/` in your browser.
 | Provider | Models |
 |----------|--------|
 | Anthropic | Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5 |
-| OpenAI | GPT-5.4, GPT-5.4 Mini, GPT-5.4 Nano, o3, o4 Mini, GPT-4o, GPT-4o Mini |
+| OpenAI | GPT-5.4, GPT-5.4 Mini, GPT-5.4 Nano, GPT-5, GPT-5 Mini, o3, o4 Mini, GPT-4o, GPT-4o Mini |
 | Google | Gemini 3.1 Pro, Gemini 2.5 Pro, Gemini 2.5 Flash |
 
 ## Scripts
