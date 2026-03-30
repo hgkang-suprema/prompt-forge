@@ -40,11 +40,28 @@ npm run preview  # 빌드 결과 미리보기
 
 ```
 src/
-├── components/ui/   # Shadcn UI 컴포넌트
-├── lib/utils.ts     # 유틸리티 (cn 함수 등)
-├── App.tsx          # 메인 앱
-├── main.tsx         # 엔트리포인트
-└── index.css        # Tailwind CSS + 테마
+├── components/
+│   ├── ui/              # Shadcn UI 컴포넌트
+│   ├── layout/          # Sidebar 등 레이아웃
+│   ├── prompt-editor    # 프롬프트 에디터 (F01)
+│   ├── stress-test      # Stress Test (F02)
+│   ├── unit-test        # Unit Testing (F03)
+│   ├── benchmark        # Model Benchmarking (F05)
+│   ├── analytics        # Analytics + Export (F06, F07)
+│   └── settings-dialog  # API Key 설정 (F04)
+├── stores/              # Zustand 스토어
+│   ├── settings-store   # API Key 관리 (persist)
+│   ├── prompt-store     # 프롬프트 상태
+│   └── result-store     # 테스트 결과 히스토리 (persist)
+├── lib/
+│   ├── llm              # LLM 호출 래퍼 (Vercel AI SDK)
+│   ├── embeddings       # 임베딩 API 호출
+│   ├── similarity       # 코사인 유사도 계산
+│   ├── evaluator        # 비교 로직 (semantic/contains/regex/exact)
+│   └── utils            # cn 함수 등
+├── App.tsx              # 메인 앱
+├── main.tsx             # 엔트리포인트
+└── index.css            # Tailwind CSS + 테마
 ```
 
 ## 문서
