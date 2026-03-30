@@ -5,13 +5,17 @@ const PROVIDERS = {
   anthropic: {
     name: 'Anthropic',
     models: [
-      { id: 'claude-sonnet-4-20250514', label: 'Claude Sonnet 4' },
-      { id: 'claude-haiku-4-20250414', label: 'Claude Haiku 4' },
+      { id: 'claude-opus-4-6', label: 'Claude Opus 4.6' },
+      { id: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6' },
+      { id: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5' },
     ],
   },
   openai: {
     name: 'OpenAI',
     models: [
+      { id: 'o3', label: 'o3' },
+      { id: 'o3-mini', label: 'o3 Mini' },
+      { id: 'o4-mini', label: 'o4 Mini' },
       { id: 'gpt-4o', label: 'GPT-4o' },
       { id: 'gpt-4o-mini', label: 'GPT-4o Mini' },
     ],
@@ -19,8 +23,8 @@ const PROVIDERS = {
   google: {
     name: 'Google',
     models: [
-      { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
       { id: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
+      { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
     ],
   },
 } as const
