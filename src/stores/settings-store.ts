@@ -13,8 +13,10 @@ const PROVIDERS = {
   openai: {
     name: 'OpenAI',
     models: [
+      { id: 'gpt-5.4', label: 'GPT-5.4' },
+      { id: 'gpt-5.4-mini', label: 'GPT-5.4 Mini' },
+      { id: 'gpt-5.4-nano', label: 'GPT-5.4 Nano' },
       { id: 'o3', label: 'o3' },
-      { id: 'o3-mini', label: 'o3 Mini' },
       { id: 'o4-mini', label: 'o4 Mini' },
       { id: 'gpt-4o', label: 'GPT-4o' },
       { id: 'gpt-4o-mini', label: 'GPT-4o Mini' },
@@ -23,6 +25,7 @@ const PROVIDERS = {
   google: {
     name: 'Google',
     models: [
+      { id: 'gemini-3.1-pro-preview', label: 'Gemini 3.1 Pro' },
       { id: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
       { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
     ],
